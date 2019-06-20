@@ -1,16 +1,18 @@
-/* body {
+body {
     background-image: url(./dark-honeycomb.png);
-} */
+} 
 
-/* #wrapper {
-    width: 960px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 5%;
-} */
+#wrapper {
+    background-color: #EEE;
+} 
 
 .card{
     width: auto;
+    padding: 2em;
+}
+.card-title{
+    border-bottom: 4px double #777;
+     
 }
 
 #articles {
@@ -23,13 +25,15 @@
 #notes {
     float: right;
     width: 30%;
+    margin-top: 0.5em;
 }
 
 textarea,
 input {
     display: block;
     width: 100%;
-    background-color: #FCF5C7;
+    background-color: rgb(231, 228, 228);
+    margin-bottom: 1em;
 }
 
 input {

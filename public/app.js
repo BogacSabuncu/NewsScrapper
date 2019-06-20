@@ -3,10 +3,14 @@ $.getJSON("/articles", function (data) {
   // For each one
   for (var i = 0; i < data.length; i++) {
 
-    let cardDiv = $("<div>").addClass("card my-2");
-    let cardBod = $("<div>").addClass("cardBody");
+    let cardDiv = $("<div>").addClass("card my-2 newsCard");
+    let cardBod = $(`<div>`).addClass("cardBody");
 
-    cardBod.append(`<h4 data-id="${data[i]._id}"> ${data[i].title}</h4>`);
+    cardDiv.attr("data-id",`${data[i]._id}`);
+
+    cardBod.append(`<h5 class="card-title"> ${data[i].title}</h5>`);
+    cardBod.append(` <p class="card-text">${data[i].body}</p>`);
+    cardBod.append(`<a href="https://www.thestreet.com${data[i].link}">Link to Article</a>`)
     cardDiv.append(cardBod);
 
     $("#articles").append(cardDiv);
@@ -32,8 +36,8 @@ $("#clearBtn").on("click", function () {
   })
 });
 
-// Whenever someone clicks a p tag
-$(document).on("click", ".card", function () {
+// Whenever someone clicks a card class tag
+$(document).on("click", ".newsCard", function () {
   // Empty the notes from the note section
   $("#notes").empty();
   // Save the id from the p tag
@@ -47,15 +51,18 @@ $(document).on("click", ".card", function () {
     // With that done, add the note information to the page
     .then(function (data) {
       console.log(data);
-      // The title of the article
-      $("#notes").append("<h2>" + data.title + "</h2>");
-      // An input to enter a new title
-      $("#notes").append("<input id='titleinput' name='title' >");
-      // A textarea to add a new note body
-      $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
-      // A button to submit a new note, with the id of the article saved to it
-      $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
 
+      let cardDiv = $("<div>").addClass("card");
+      let cardBod = $(`<div>`).addClass("cardBody");
+  
+      cardBod.append(`<h6 class="card-title"> ${data.title}</h6>`);
+      cardBod.append("<input id='titleinput' name='title' >");
+      cardBod.append("<textarea id='bodyinput' name='body'></textarea>");
+      cardBod.append("<button class='btn btn-primary' data-id='" + data._id + "' id='savenote'>Save Note</button>");
+
+      cardDiv.append(cardBod);
+      $("#notes").append(cardDiv);
+      
       // If there's a note in the article
       if (data.note) {
         // Place the title of the note in the title input
